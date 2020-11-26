@@ -1,7 +1,6 @@
 CC = gcc
 FLAGS=-Wall
 
-
 all: main
 	
 main: main.o libmyBank.a

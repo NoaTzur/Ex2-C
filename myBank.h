@@ -1,6 +1,7 @@
-#include "banksStatus.c"
+
 
 #include "myBank.c"
+
 
 void openBank(double amount);
 

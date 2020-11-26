@@ -26,7 +26,7 @@ int main(){
         if(userChoice == 'O' && check == 1)
         {
             printf("Please enter the initial amount you want to deposit to your new account");
-            if(((scanf("%ld", &amount)) == 1) && amount > 0)
+            if(((scanf("%lf", &amount)) == 1) && amount > 0)
             {
                 openBank(amount);
             }
@@ -50,8 +50,12 @@ int main(){
         }
         else if (userChoice == 'D' && check == 1)
         {
-            printf("Enter the account number, and then the amount you want to deposit");
-            if((scanf("%d%lf", &accountNumber, &amount)) ==1)
+            printf("Enter the account number: ");
+            int check1 = scanf("%d", &accountNumber);
+            printf("Enter the amount you want to deposit: ");
+            int check2 = scanf("%lf", &amount);
+            
+            if(check1 ==1 && check2 == 1)
             {
                 printAfterDeposit(accountNumber, amount);
             }
@@ -63,8 +67,12 @@ int main(){
 
         else if (userChoice == 'W' && check == 1)
         {
-            printf("Enter the account number, and then the amount you want to withdraw");
-            if((scanf("%d%lf", &accountNumber, &amount)) ==1)
+            printf("Enter the account number: ");
+            int check1 = scanf("%d", &accountNumber);
+            printf("Enter the amount you want to withdraw: ");
+            int check2 = scanf("%lf", &amount);
+            
+            if(check1 ==1 && check2 == 1)
             {
                 withdrawal(accountNumber, amount);
             }
@@ -90,7 +98,7 @@ int main(){
         else if (userChoice == 'I' && check == 1)
         {
             double interest = 0;
-            int checks = scanf("%.2lf", &interest);
+            int checks = scanf("%lf", &interest);
             if(checks == 1 && interest > 0)
             {
                addingInterest(interest);         

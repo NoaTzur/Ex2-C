@@ -1,5 +1,6 @@
-#include "banksStatus.c"
+
 #include <stdio.h>
+#include "banksStatus.c"
 #define first_account 901
 #define total_num_of_accounts 50
 
@@ -25,8 +26,8 @@ void openBank(double amount){
 void printBalance(int accountNumber){
 
     int index_in_arr = accountNumber-first_account; //account 950-901 == index 49 in array
-    //if it is close so bank_status[index_in_arr] == 0 (false) and the index is 0-49
-    if(banks_status[index_in_arr] && index_in_arr>=0 && index_in_arr<50)  
+    //if it is close so bank_status[index_in_arr][0] == 0 (false) and the index is 0-49
+    if(banks_status[index_in_arr][0] && index_in_arr>=0 && index_in_arr<50)  
     {  
         double balance = banks_status[index_in_arr][1];
         printf("the balance in account number %d, is %.2f", accountNumber, balance);
@@ -106,7 +107,7 @@ void printAll(){
 
     for(int i=0; i<total_num_of_accounts; i++){
         if(banks_status[i][0]!=0){ // banks_status[i][0] == 0 means the account is closed
-            printf("Account number: %d, the balance is: %.2f", banks_status[i][0], banks_status[i][1]);
+            printf("Account number: %.2f, the balance is: %.2f", banks_status[i][0], banks_status[i][1]);
         }
     }
 }
