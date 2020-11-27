@@ -30,32 +30,32 @@ int main(){
 	
 		if(userChoice == 'O' && check == 1)
 		{
-		    printf("Please enter the initial amount you want to deposit to your new account");
+		    printf("Please enter amount for deposit:");
 		    if(((scanf("%lf", &amount)) == 1) && amount > 0)
 		    {
 		        openBank(amount);
 		    }
 		    else
 		    {
-		        printf("you didnt enter valid amount. please enter a number bigger then 0");
+		        printf("Failed to read the amount");
 		    }
 		}
 		else if (userChoice == 'B' && check == 1)
 		{
-		    printf("what is you account number?");
+		    printf("Please enter account number:");
 		    if((scanf("%d", &accountNumber)) ==1)
 		    {
 		        printBalance(accountNumber);
 		    }
 		    else
 		    {
-		        printf("The account number you have entered is not valid, or the account is closed at this moment");
+		        printf("Failed to read the account number");
 		    }
 		    
 		}
 		else if (userChoice == 'D' && check == 1)
 		{
-		    printf("Enter the account number: ");
+		    printf("Please enter account number:");
 		    int check1 = scanf("%d", &accountNumber);
 		    printf("Enter the amount you want to deposit: ");
 		    int check2 = scanf("%lf", &amount);
@@ -66,15 +66,15 @@ int main(){
 		    }
 		    else
 		    {
-		        printf("you have entered invalid values");
+		        printf("Failed to read the account number");
 		    }
 		}
 
 		else if (userChoice == 'W' && check == 1)
 		{
-		    printf("Enter the account number: ");
+		    printf("Please enter account number: ");
 		    int check1 = scanf("%d", &accountNumber);
-		    printf("Enter the amount you want to withdraw: ");
+		    printf("Please enter the amount to withdraw:");
 		    int check2 = scanf("%lf", &amount);
 		    
 		    if(check1 ==1 && check2 == 1)
@@ -83,14 +83,14 @@ int main(){
 		    }
 		    else
 		    {
-		        printf("you have entered invalid values");
+		        printf("Failed to read the account number");
 		    }
 		    
 
 		}
 		else if (userChoice == 'C' && check == 1)
 		{
-		    printf("Please enter the account number you want to close");
+		    printf("Please enter account number:");
 		    if((scanf("%d", &accountNumber)) ==1)
 		    {
 		        closeAccount(accountNumber);
@@ -103,7 +103,7 @@ int main(){
 		else if (userChoice == 'I' && check == 1)
 		{
 		    double interest = 0;
-		    printf("please enter an interest:" );
+		    printf("Please enter interest rate:" );
 		    int checks = scanf("%lf", &interest);
 
 		    if(checks == 1 && interest > 0)
@@ -112,7 +112,7 @@ int main(){
 		    }
 		    else
 		    {
-		        printf("invalid interest");
+		        printf("Failed to read the interest rate");
 		    }
 		    
 		}
@@ -120,10 +120,11 @@ int main(){
 		{
 		    printAll();
 		}
-		else if (userChoice == 'E' && check == 1)
+		else
 		{
-		    printf("Bye-Bye!");
-		} 
+			printf("Invalid transaction type");
+		}
+		
 		
 		clearBuffer();		
 	    }

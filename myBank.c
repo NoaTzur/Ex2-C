@@ -13,7 +13,7 @@ void openBank(double amount){
         banks_status[arrayIndex][0] = curr_num_of_account;
         banks_status[arrayIndex][1] = amount;
 
-        printf("Bank account successfully opened! your acount number is: %d\n", curr_num_of_account );
+        printf("New account number is: %d\n", curr_num_of_account );
         curr_num_of_account++;
         arrayIndex++;
     }
@@ -30,11 +30,11 @@ void printBalance(int accountNumber){
     if(banks_status[index_in_arr][0] && index_in_arr>=0 && index_in_arr<50)  
     {  
         double balance = banks_status[index_in_arr][1];
-        printf("the balance in account number %d, is %.2f\n", accountNumber, balance);
+        printf("The balance of account number %d is: %.2f\n", accountNumber, balance);
     }
     else
     {
-        printf("This account is closed, no action can be performed\n");
+        printf("This account is closed\n");
     }
 
 }
@@ -66,11 +66,11 @@ void withdrawal(int accountNumber, double amount){
         if(newAmount > 0)
         {
             banks_status[index_in_arr][1] = *p;
-            printf("The new balance is %.2f\n", *p);
+            printf("The new balance is: %.2f\n", *p);
         }
         else
         {
-            printf("There is not enough cash in this account to perform a withdrawal\n");
+            printf("Cannot withdraw more than the balance\n");
         }
     }
     else
@@ -108,7 +108,7 @@ void printAll(){
 
     for(int i=0; i<total_num_of_accounts; i++){
         if(banks_status[i][0]!=0){ // banks_status[i][0] == 0 means the account is closed
-            printf("Account number: %.2f, the balance is: %.2f\n", banks_status[i][0], banks_status[i][1]);
+            printf("The balance of account number %.2f is: %.2f\n", banks_status[i][0], banks_status[i][1]);
         }
     }
 }
