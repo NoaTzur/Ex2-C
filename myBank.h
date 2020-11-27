@@ -2,6 +2,7 @@
 
 #include "myBank.c"
 
+void clearBuffer(void);
 
 void openBank(double amount);
 
