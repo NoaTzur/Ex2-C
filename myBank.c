@@ -6,14 +6,27 @@
 
 int static curr_num_of_account = first_account; //901 is the first bank number
 int static arrayIndex = 0;
+int *pAcc= &curr_num_of_account;
+int *pArr = &arrayIndex;
+
+void checkForSpcaesInArray(){
+	for(int i=0; i<50; i++){
+		if(banks_status[i][0] == 0){
+			*pArr = i;
+			*pAcc = 901+i;
+		}
+	}
+}
 
 void openBank(double amount){
 
-    if(curr_num_of_account <= 950){ //950 is the last bank number that can be opened.
-        banks_status[arrayIndex][0] = curr_num_of_account;
-        banks_status[arrayIndex][1] = amount;
+	checkForSpcaesInArray(); //checks if there is any spaces in the array
 
-        printf("New account number is: %d\n", curr_num_of_account );
+    if(curr_num_of_account <= 950){ //950 is the last bank number that can be opened.
+        banks_status[*pArr][0] = *pAcc;
+        banks_status[*pArr][1] = amount;
+
+        printf("New account number is: %d\n", *pAcc );
         curr_num_of_account++;
         arrayIndex++;
     }
@@ -43,15 +56,19 @@ void printAfterDeposit(int accountNumber, double amount) {
 
     int index_in_arr = accountNumber-first_account; //account 950-901 == index 49 in array
     //if it is close so bank_status[index_in_arr] == 0 (false) and the index is 0-49
-    if(banks_status[index_in_arr] && index_in_arr>=0 && index_in_arr<50 && amount >0)  
+    if(index_in_arr>=0 && banks_status[index_in_arr][0] && index_in_arr<50 && amount >0)  
     {  
         banks_status[index_in_arr][1] += amount;
         double balance = banks_status[index_in_arr][1];
         printf("the balance after depositing in account number %d, is %.2f\n", accountNumber, balance);
     }
+    else if(amount < 0)
+    { 
+    	printf("Cannot deposit a negative amount");
+    }
     else
     {
-        printf("This account is closed, no action can be performed\n");
+        printf("This account is closed\n");
     }
 }
 
@@ -86,7 +103,10 @@ void closeAccount(int accountNumber){
     if(banks_status[index_in_arr] && index_in_arr>=0 && index_in_arr<50)  
     {  
         banks_status[index_in_arr][0] = 0;
-        printf("Account number %d closed successfully\n", accountNumber);
+        printf("Closed account number %d\n", accountNumber);
+        curr_num_of_account--;
+        
+        
     }
     else
     {
@@ -94,7 +114,7 @@ void closeAccount(int accountNumber){
     }
 }
 
-void addingInterest(double interest_rate){
+void addingInterest(int interest_rate){
 
     for(int i=0; i<total_num_of_accounts; i++){
         if(banks_status[i][0]!=0){ // banks_status[i][0] == 0 means the account is closed

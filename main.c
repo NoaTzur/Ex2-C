@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "myBank.h"
 
-void clearBuffer(void){
+//void clearBuffer(void){
 
-	int ch;
-	while(((ch = getchar()) != '\n') && (ch!=EOF));
-	}
+//	int ch;
+//	while(((ch = getchar()) != '\n') && (ch!=EOF));
+//	}
 
 
 int main(){
@@ -31,13 +31,18 @@ int main(){
 		if(userChoice == 'O' && check == 1)
 		{
 		    printf("Please enter amount for deposit:");
-		    if(((scanf("%lf", &amount)) == 1) && amount > 0)
+		    int check = (scanf("%lf", &amount));
+		    if((check == 1) && amount > 0)
 		    {
 		        openBank(amount);
 		    }
-		    else
+		    else if ((check == 1) && amount<0)
 		    {
-		        printf("Failed to read the amount");
+		    	printf("Invalid Amount\n");
+		    }
+		    else 
+		    {
+		        printf("Failed to read the amount\n");
 		    }
 		}
 		else if (userChoice == 'B' && check == 1)
@@ -57,62 +62,91 @@ int main(){
 		{
 		    printf("Please enter account number:");
 		    int check1 = scanf("%d", &accountNumber);
-		    printf("Enter the amount you want to deposit: ");
-		    int check2 = scanf("%lf", &amount);
-			
-		    if(check1 ==1 && check2 == 1)
+		    if(accountNumber>64 && accountNumber <128)
 		    {
-		        printAfterDeposit(accountNumber, amount);
+		    	printf("Failed to read the account number");
+		    }
+		    else if(accountNumber<901 || accountNumber >950)
+		    {
+		    	printf("Invalid account number");
+		    }
+		    else if(banks_status[accountNumber-901][0] == 0) 
+		    {
+		    	printf("This account is closed");
 		    }
 		    else
 		    {
-		        printf("Failed to read the account number");
-		    }
+		    	printf("Please enter the amount to deposit:");
+		    	int check2 = scanf("%lf", &amount);
+			
+		    	if(check1 ==1 && check2 == 1)
+		    	{
+		      	  printAfterDeposit(accountNumber, amount);
+		    	}
+		    	else
+		    	{
+		    	printf("Failed to read the amount");
+		    	}
+		}
 		}
 
 		else if (userChoice == 'W' && check == 1)
 		{
 		    printf("Please enter account number: ");
 		    int check1 = scanf("%d", &accountNumber);
-		    printf("Please enter the amount to withdraw:");
-		    int check2 = scanf("%lf", &amount);
-		    
-		    if(check1 ==1 && check2 == 1)
+		    if(banks_status[accountNumber-901][0] == 0) 
 		    {
-		        withdrawal(accountNumber, amount);
+		    	printf("This account is closed");
 		    }
 		    else
 		    {
-		        printf("Failed to read the account number");
-		    }
+		    	printf("Please enter the amount to withdraw:");
+		    	int check2 = scanf("%lf", &amount);
 		    
+		    	if(check1 ==1 && check2 == 1)
+		    	{
+		        	withdrawal(accountNumber, amount);
+		    	}
+		    	else
+		    	{
+		        	printf("Failed to read the account number");
+		    	}
+		    }
 
 		}
 		else if (userChoice == 'C' && check == 1)
 		{
 		    printf("Please enter account number:");
-		    if((scanf("%d", &accountNumber)) ==1)
+		    if((scanf("%d", &accountNumber)) ==1 && banks_status[accountNumber-901][0])
 		    {
 		        closeAccount(accountNumber);
 		    }
+		    else if(banks_status[accountNumber-901][0] == 0)
+		    {
+		    	printf("This account is already closed");
+		    }
 		    else
 		    {
-		        printf("The account number you have entered is not valid, or the account is already closed");
+		        printf("Invalid info");
 		    }
 		}
 		else if (userChoice == 'I' && check == 1)
 		{
-		    double interest = 0;
+		    int interest = 0;
 		    printf("Please enter interest rate:" );
-		    int checks = scanf("%lf", &interest);
+		    int checks = scanf("%d", &interest);
 
 		    if(checks == 1 && interest > 0)
 		    {
 		       addingInterest(interest);         
 		    }
+		    else if(interest<0)
+		    {
+		        printf("Invalid interest rate");
+		    }
 		    else
 		    {
-		        printf("Failed to read the interest rate");
+		    	printf("Failed to read the interest rate");
 		    }
 		    
 		}
@@ -120,13 +154,17 @@ int main(){
 		{
 		    printAll();
 		}
+		
+		else if (userChoice == 'E' && check == 1)
+		{
+		    
+		}
 		else
 		{
-			printf("Invalid transaction type");
+			printf("Invalid transaction type\n");
 		}
 		
-		
-		clearBuffer();		
+		//clearBuffer();		
 	    }
 
 	return 0;
