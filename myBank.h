@@ -2,7 +2,7 @@
 
 #include "myBank.c"
 
-void checkForSpcaesInArray();
+int checkForSpcaesInArray();
 
 void clearBuffer(void);
 

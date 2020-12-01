@@ -6,16 +6,19 @@
 
 int static curr_num_of_account = first_account; //901 is the first bank number
 int static arrayIndex = 0;
-int *pAcc= &curr_num_of_account;
-int *pArr = &arrayIndex;
 
-void checkForSpcaesInArray(){
+
+int checkForSpcaesInArray(){
+	
 	for(int i=0; i<50; i++){
 		if(banks_status[i][0] == 0){
-			*pArr = i;
-			*pAcc = 901+i;
+			curr_num_of_account = 901+i;
+			arrayIndex =i;
+			return 0;	
 		}
 	}
+	return 0;
+
 }
 
 void openBank(double amount){
@@ -23,10 +26,10 @@ void openBank(double amount){
 	checkForSpcaesInArray(); //checks if there is any spaces in the array
 
     if(curr_num_of_account <= 950){ //950 is the last bank number that can be opened.
-        banks_status[*pArr][0] = *pAcc;
-        banks_status[*pArr][1] = amount;
+        banks_status[arrayIndex][0] = curr_num_of_account;
+        banks_status[arrayIndex][1] = amount;
 
-        printf("New account number is: %d\n", *pAcc );
+        printf("New account number is: %d\n", curr_num_of_account );
         curr_num_of_account++;
         arrayIndex++;
     }
